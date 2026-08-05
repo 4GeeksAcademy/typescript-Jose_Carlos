@@ -1,18 +1,3 @@
-if (typeof document !== "undefined") {
-  import("./style.css").then(() => {
-    const app = document.querySelector<HTMLParagraphElement>("#app");
-    if (app) {
-      app.textContent = "If you can see this, Tailwind is working.";
-    }
-  });
-}
-
-console.log("Hello from src/main.ts");
-
-export {};
-
-
-
 /*Creamos la sala de cine para 8 filas y 10 columnas*/ 
 
 let filas: number = 8;
@@ -145,21 +130,21 @@ function buscarAsientosConsecutivos(sala:number[][]): string | null {
 
 let salaInicial = crearSala(filasReal, columnasReal);
 let salaActual = mostrarSala(salaInicial);
-console.log(salaActual);
+//console.log(salaActual);
 
-let primeraReserva = reservarAsiento(salaInicial, 7, 7);
-console.log(mostrarSala(primeraReserva));
+//let primeraReserva = reservarAsiento(salaInicial, 7, 7);
+//console.log(mostrarSala(primeraReserva));
 
-let segundaReserva = reservarAsiento(salaInicial, 7, 7);
-console.log(mostrarSala(segundaReserva));
+//let segundaReserva = reservarAsiento(salaInicial, 7, 7);
+//console.log(mostrarSala(segundaReserva));
 
-let checkAsientos = contarAsientos(segundaReserva);
-console.log(`Asientos libres: ${checkAsientos.libres}, Asientos ocupados: ${checkAsientos.ocupados}`);
+//let checkAsientos = contarAsientos(segundaReserva);
+//console.log(`Asientos libres: ${checkAsientos.libres}, Asientos ocupados: ${checkAsientos.ocupados}`);
 
 //let cancelarReserva1 = cancelarReserva(segundaReserva, 7, 7);
 //console.log(mostrarSala(cancelarReserva1));
 
-let buscarAsientos = buscarAsientosConsecutivos(segundaReserva);
-console.log(buscarAsientos);
+//let buscarAsientos = buscarAsientosConsecutivos(segundaReserva);
+//console.log(buscarAsientos);
 
 /*                Qué pasa con el console.log si se devuelve null                       */
