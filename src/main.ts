@@ -66,6 +66,8 @@ function reservarAsiento(sala:number[][], fila:number, columna:number): number[]
         if(sala[row][colum] === 0){
           sala[row][colum] = 1;
           console.log(`Asiento reservado en la fila ${fila} y columna ${columna}`);
+        }else if(sala[row][colum] === 1){
+          console.log(`El asiento en la fila ${fila} y columna ${columna} ya está ocupado`);
         }
       }
     }
@@ -73,9 +75,30 @@ function reservarAsiento(sala:number[][], fila:number, columna:number): number[]
   return sala;
 }
 
+/* Función para contar asientos libres y ocupados */
+function contarAsientos(sala:number[][]): {libres: number, ocupados: number} {
+  let libres: number = 0;
+  let ocupados: number = 0;
+  for(let row = 0; row< sala.length; row++){
+    for (let colum = 0; colum < sala[row].length; colum++){
+      if(sala[row][colum] === 1){
+        ocupados++;
+      } else if(sala[row][colum] === 0){
+        libres++;
+      }
+    }
+  }
+  return {libres, ocupados};
+}
+
+
 
 let salaInicial = crearSala(filasReal, columnasReal);
 let salaActual = mostrarSala(salaInicial);
 console.log(salaActual);
 let primeraReserva = reservarAsiento(salaInicial, 7, 7);
 console.log(mostrarSala(primeraReserva));
+let segundaReserva = reservarAsiento(salaInicial, 7, 7);
+console.log(mostrarSala(segundaReserva));
+let checkAsientos = contarAsientos(segundaReserva);
+console.log(`Asientos libres: ${checkAsientos.libres}, Asientos ocupados: ${checkAsientos.ocupados}`);
