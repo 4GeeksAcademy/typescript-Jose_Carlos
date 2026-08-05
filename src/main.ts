@@ -32,7 +32,7 @@ function crearSala(filas:number , columnas:number): number[][] {
 
 /*Función para mostrar la sala de cine*/
 
-function mostrarSala(sala:number[][]): void {
+function mostrarSala(sala:number[][]): string {
   let actualSala: string = "";
   let numeroFila: number = 1;
   let numeroColumna: number = 1;
@@ -54,10 +54,28 @@ function mostrarSala(sala:number[][]): void {
     }
     actualSala += "\n";
   }
-  console.log(actualSala);
+  return actualSala;
 }
 
-let salaInicial = crearSala(filasReal, columnasReal);
-mostrarSala(salaInicial);
-
 /*Función para reservar un asiento*/
+
+function reservarAsiento(sala:number[][], fila:number, columna:number): number[][] {
+  for(let row = 0; row < sala.length; row++){
+    for(let colum = 0; colum < sala[row].length; colum++){
+      if(row === fila && colum === columna){
+        if(sala[row][colum] === 0){
+          sala[row][colum] = 1;
+          console.log(`Asiento reservado en la fila ${fila} y columna ${columna}`);
+        }
+      }
+    }
+  }
+  return sala;
+}
+
+
+let salaInicial = crearSala(filasReal, columnasReal);
+let salaActual = mostrarSala(salaInicial);
+console.log(salaActual);
+let primeraReserva = reservarAsiento(salaInicial, 7, 7);
+console.log(mostrarSala(primeraReserva));
