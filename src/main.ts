@@ -11,7 +11,10 @@ console.log("Hello from src/main.ts");
 
 export {};
 
+
+
 /*Creamos la sala de cine para 8 filas y 10 columnas*/ 
+
 let filas: number = 8;
 let columnas: number = 10;
 
@@ -29,6 +32,8 @@ function crearSala(filas:number , columnas:number): number[][] {
   }
   return cineInicial;
 }
+
+
 
 /*Función para mostrar la sala de cine*/
 
@@ -57,6 +62,8 @@ function mostrarSala(sala:number[][]): string {
   return actualSala;
 }
 
+
+
 /*Función para reservar un asiento*/
 
 function reservarAsiento(sala:number[][], fila:number, columna:number): number[][] {
@@ -75,7 +82,11 @@ function reservarAsiento(sala:number[][], fila:number, columna:number): number[]
   return sala;
 }
 
+
+
+
 /* Función para contar asientos libres y ocupados */
+
 function contarAsientos(sala:number[][]): {libres: number, ocupados: number} {
   let libres: number = 0;
   let ocupados: number = 0;
@@ -91,14 +102,64 @@ function contarAsientos(sala:number[][]): {libres: number, ocupados: number} {
   return {libres, ocupados};
 }
 
+/* Función para cancelar una reserva */
+function cancelarReserva(sala:number[][], fila:number, columna:number): number[][] {
+  for(let row = 0; row < sala.length; row++){
+    for(let colum = 0; colum < sala[row].length; colum++){
+      if(row === fila && colum === columna){
+        if(sala[row][colum] === 1){
+          sala[row][colum] = 0;
+          console.log(`Reserva de asiento cancelada en la fila ${fila} y columna ${columna}`);
+        }
+        }
+      }
+    }
+    return sala;
+  }
+
+
+
+
+
+  /* Función para buscar dos asientos libres consecutivos */
+
+function buscarAsientosConsecutivos(sala:number[][]): string | null {
+  let asientosConsecutivos: string = "";
+  let asientosLibres: number = contarAsientos(sala).libres;
+  for(let row = 1; row < sala.length; row++){
+    for(let colum = 1; colum < sala[row].length - 1; colum++){
+      if(sala[row][colum] === 0 && sala[row][colum + 1] === 0){
+        asientosConsecutivos += `Hay asientos libres consecutivos en la fila ${row} y columnas ${colum} y ${colum + 1}.`;
+        return asientosConsecutivos;
+      } else if(asientosLibres < 2){
+        console.log(`No hay asientos libres consecutivos`);
+        return null;
+      }
+    }
+  }
+  return asientosConsecutivos.length > 0 ? asientosConsecutivos : null;
+}
+
+
 
 
 let salaInicial = crearSala(filasReal, columnasReal);
 let salaActual = mostrarSala(salaInicial);
 console.log(salaActual);
+
 let primeraReserva = reservarAsiento(salaInicial, 7, 7);
 console.log(mostrarSala(primeraReserva));
+
 let segundaReserva = reservarAsiento(salaInicial, 7, 7);
 console.log(mostrarSala(segundaReserva));
+
 let checkAsientos = contarAsientos(segundaReserva);
 console.log(`Asientos libres: ${checkAsientos.libres}, Asientos ocupados: ${checkAsientos.ocupados}`);
+
+//let cancelarReserva1 = cancelarReserva(segundaReserva, 7, 7);
+//console.log(mostrarSala(cancelarReserva1));
+
+let buscarAsientos = buscarAsientosConsecutivos(segundaReserva);
+console.log(buscarAsientos);
+
+/*                Qué pasa con el console.log si se devuelve null                       */
