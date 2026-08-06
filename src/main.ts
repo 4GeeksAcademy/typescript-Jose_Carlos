@@ -147,4 +147,3 @@ let salaActual = mostrarSala(salaInicial);
 //let buscarAsientos = buscarAsientosConsecutivos(segundaReserva);
 //console.log(buscarAsientos);
 
-/*                Qué pasa con el console.log si se devuelve null                       */
