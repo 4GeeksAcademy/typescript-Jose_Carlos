@@ -26,6 +26,10 @@ function mostrarSala(sala:number[][]): string {
   let actualSala: string = "";
   let numeroFila: number = 1;
   let numeroColumna: number = 1;
+  const RESET = "\x1b[0m";
+  const BG_VERDE = "\x1b[42m"; // Asiento libre
+  const BG_ROJO = "\x1b[41m";  // Asiento ocupado
+  const FG_NEGRO = "\x1b[30m"; // letra negra para contraste
   for(let row = 0; row < sala.length; row++){
     for(let colum = 0; colum < sala[row].length; colum++){
       if (row === 0 && colum === 0) {
@@ -37,9 +41,9 @@ function mostrarSala(sala:number[][]): string {
         actualSala += numeroFila.toString() + " ";
         numeroFila++;
       }else if(sala[row][colum] === 0){
-        actualSala += "L ";
+        actualSala += `${BG_VERDE}${FG_NEGRO} L ${RESET}`;
       }else{
-        actualSala += "X ";
+        actualSala += `${BG_ROJO}${FG_NEGRO} X ${RESET}`;
       }
     }
     actualSala += "\n";
@@ -130,20 +134,20 @@ function buscarAsientosConsecutivos(sala:number[][]): string | null {
 
 let salaInicial = crearSala(filasReal, columnasReal);
 let salaActual = mostrarSala(salaInicial);
-//console.log(salaActual);
+console.log(salaActual);
 
-//let primeraReserva = reservarAsiento(salaInicial, 7, 7);
-//console.log(mostrarSala(primeraReserva));
+let primeraReserva = reservarAsiento(salaInicial, 7, 7);
+console.log(mostrarSala(primeraReserva));
 
-//let segundaReserva = reservarAsiento(salaInicial, 7, 7);
-//console.log(mostrarSala(segundaReserva));
+let segundaReserva = reservarAsiento(salaInicial, 7, 7);
+console.log(mostrarSala(segundaReserva));
 
-//let checkAsientos = contarAsientos(segundaReserva);
-//console.log(`Asientos libres: ${checkAsientos.libres}, Asientos ocupados: ${checkAsientos.ocupados}`);
+let checkAsientos = contarAsientos(segundaReserva);
+console.log(`Asientos libres: ${checkAsientos.libres}, Asientos ocupados: ${checkAsientos.ocupados}`);
 
-//let cancelarReserva1 = cancelarReserva(segundaReserva, 7, 7);
-//console.log(mostrarSala(cancelarReserva1));
+let cancelarReserva1 = cancelarReserva(segundaReserva, 7, 7);
+console.log(mostrarSala(cancelarReserva1));
 
-//let buscarAsientos = buscarAsientosConsecutivos(segundaReserva);
-//console.log(buscarAsientos);
+let buscarAsientos = buscarAsientosConsecutivos(segundaReserva);
+console.log(buscarAsientos);
 
